@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.8.3/angular-messages.min.js"></script>
+
+  <style>
+    html,
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+  <title>Document</title>
+</head>
+
+<body ng-app="appRouter">
+  <div ng-view></div>
+
+  <script src="app/app.js"></script>
+  <script src="app/controllers/productController.js"></script>
+  <script src="app/services/productService.js"></script>
+
+</body>
+
+</html>
