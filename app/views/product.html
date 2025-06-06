@@ -1,0 +1,29 @@
+<header class="w-full text-center mt-2">
+  <a ng-href="#!/products/">Voltar</a>
+</header>
+
+<div
+  class="flex flex-col md:flex-row items-center md:items-start gap-6 p-6 bg-white rounded-lg shadow-md max-w-4xl mx-auto mt-5">
+  <div class="md:flex-1 w-full max-w-md">
+    <img src="https://placehold.co/200" alt="{{ product.title }}"
+      class="w-full h-auto rounded-md object-cover shadow-sm" />
+  </div>
+
+  <div class="md:flex-1 w-full max-w-md flex flex-col justify-center space-y-4">
+    <h1 class="text-3xl font-semibold text-gray-900">{{ product.title }}</h1>
+    <span class="text-orange-400">{{ product.category.name }}</span>
+    <p class="text-gray-700 text-base leading-relaxed">{{ product.description }}</p>
+    <p class="text-xl font-bold text-gray-900">R$ {{ product.price }}</p>
+
+    <div class="flex flex-row justify-between items-center">
+      <a ng-href="#!/products/{{ product.id }}/edit"
+        class="bg-[#4b5563] text-white px-4 py-2 rounded hover:bg-[#374151] transition">
+        Atualizar
+      </a>
+      <button class="bg-[#e11d48] text-white px-4 py-2 rounded hover:bg-[#be123c] transition"
+        ng-click="deleteProduct(product.id)">
+        Deletar
+      </button>
+    </div>
+  </div>
+</div>
