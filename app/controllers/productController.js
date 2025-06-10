@@ -25,9 +25,6 @@
             $scope.products.push(savedProduct);
           }
 
-          $scope.formData = angular.copy(savedProduct);
-          $scope.formData.categoryId = savedProduct.category?.id || null;
-
           $location.path(`/products/${savedProduct.id}`);
         })
         .catch(errorMsg => {
