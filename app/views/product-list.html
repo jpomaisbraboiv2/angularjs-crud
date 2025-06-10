@@ -1,8 +1,8 @@
-<header class="flex items-center justify-between gap-4 px-4 h-16 bg-white w-full sticky top-0 z-50">
+<header class="flex items-center justify-between gap-4 px-4 h-16 bg-white w-full sticky top-0 z-1">
   <h1 class="text-3xl font-bold">Produtos</h1>
 
-  <input type="text" class="p-2 border border-gray-300 rounded-md text-sm w-full max-w-md" ng-model="search"
-    ng-model-options="{ debounce: 200 }" placeholder="Buscar produto..." />
+  <input type="text" class="p-2 border border-gray-300 rounded-md text-sm w-full max-w-md"
+    ng-model-options="{ debounce: 200 }" ng-focus="showModal()" placeholder="Buscar produto..." readonly />
 
   <a ng-href="#!/products/new"
     class="bg-blue-600 text-white px-3 py-3 text-base font-medium rounded hover:bg-blue-700 transition">
@@ -10,15 +10,39 @@
   </a>
 </header>
 
-<div class="p-4" ng-show="search">
-  <h1>Mostrando resultados para "{{ search }}"</h1>
+<div class="fixed inset-0 bg-[#332f2fa9] flex items-center justify-center z-50" ng-show="isOpened">
+  <button ng-click="showModal()" class="fixed top-3 right-3 text-white text-bold bg-red-900 p-3">FECHAR</button>
+  <div class="bg-white rounded-lg shadow-lg w-[80vw] h-[90vh] p-6 flex flex-col space-y-4">
+    <input ng-model="search" type="text" placeholder="Digite algo..."
+      class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+    <div ng-show="!search">Tente pesquisar por algum produto...</div>
+    <div ng-show="search">
+      <h1>Mostrando resultados para "{{ search }}"</h1>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full  overflow-y-auto overflow-x-hidden
+    ">
+      <div ng-show="search" ng-repeat="product in products | filter:search"
+        class="bg-[#f9f9f9] p-6  flex flex-col justify-between text-start shadow rounded-lg max-h-[40vh]">
+        <a class="cursor-pointer" ng-href="#!/products/{{ product.id }}">
+          <h1 class="text-[#111827] text-xl font-semibold truncate">{{ product.title }}</h1>
+          <p class="text-sm text-[#4b5563] mt-2 break-words whitespace-normal line-clamp-5">
+            {{ product.description }}
+          </p>
+          <h2 class="text-lg mt-2 font-bold text-[#1f2937]">R$ {{ product.price }}</h2>
+        </a>
+      </div>
+    </div>
+
+  </div>
 </div>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 w-full mt-2">
-  <div ng-repeat="product in products | filter:search"
+  <div ng-repeat="product in products"
     class="bg-[#f9f9f9] p-4 flex flex-col justify-between text-start shadow rounded-lg">
     <a class="cursor-pointer" ng-href="#!/products/{{ product.id }}">
       <h1 class="text-[#111827] text-xl font-semibold">{{ product.title }}</h1>
-      <p class="text-sm text-[#4b5563] mt-2 break-words whitespace-normal">
+      <p class="text-sm text-[#4b5563] mt-2 break-words whitespace-normal line-clamp-3">
         {{ product.description }}
       </p>
       <h2 class="text-lg mt-2 font-bold text-[#1f2937]">R$ {{ product.price }}</h2>

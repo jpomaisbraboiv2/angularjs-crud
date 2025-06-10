@@ -1,6 +1,7 @@
 (function () {
   app.controller("ProductController", function ($scope, $location, $routeParams, productsApi) {
     const productId = $routeParams.id
+    $scope.isOpened = false
 
     productsApi.getProducts().then(function (response) {
       $scope.products = response.data;
@@ -9,6 +10,11 @@
     productsApi.getCategories().then(function (response) {
       $scope.categories = response.data;
     });
+
+    $scope.showModal = function () {
+      $scope.isOpened = !$scope.isOpened
+      console.log($scope.isOpened)
+    }
 
     $scope.submitForm = function () {
       delete $scope.formData.slug;
